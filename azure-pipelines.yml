@@ -1,5 +1,7 @@
 variables:
-  buildConfiguration: 'Release'  
+  buildConfiguration: 'Release'
+  webappServiceConnection: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
+  databaseServiceConnection: 'Resource Manager - Tailspin - Space Game (databricks-rg)'
 
 stages:
 - stage: 'Build'
@@ -149,7 +151,7 @@ stages:
           - task: SqlAzureDacpacDeployment@1
             displayName: 'Deploy SQL schema'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game (databricks-rg)'
+              azureSubscription: '$(databaseServiceConnection)'
               authenticationType: 'server'
               serverName: '$(servername).database.windows.net'
               databaseName: '$(databasename)'
@@ -179,7 +181,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
+              azureSubscription: $(webappServiceConnection)
               appName: '$(WebAppNameDev)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
@@ -202,7 +204,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
+              azureSubscription: $(webappServiceConnection)
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
@@ -225,6 +227,6 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
+              azureSubscription: $(webappServiceConnection)
               appName: '$(WebAppNameStaging)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
