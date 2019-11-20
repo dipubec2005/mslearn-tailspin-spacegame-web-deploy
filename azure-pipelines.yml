@@ -1,5 +1,6 @@
 variables:
   buildConfiguration: 'Release'
+  webappServiceConnection: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
 
 stages:
 - stage: 'Build'
