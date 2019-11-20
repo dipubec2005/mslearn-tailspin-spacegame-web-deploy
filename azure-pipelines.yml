@@ -1,6 +1,5 @@
 variables:
-  buildConfiguration: 'Release'
-  webappServiceConnection: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
+  buildConfiguration: 'Release'  
 
 stages:
 - stage: 'Build'
@@ -180,7 +179,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: $(webappServiceConnection)
+              azureSubscription: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
               appName: '$(WebAppNameDev)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
@@ -203,7 +202,7 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: $(webappServiceConnection)
+              azureSubscription: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
               appName: '$(WebAppNameTest)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
 
@@ -226,6 +225,6 @@ stages:
           - task: AzureWebApp@1
             displayName: 'Azure App Service Deploy: website'
             inputs:
-              azureSubscription: $(webappServiceConnection)
+              azureSubscription: 'Resource Manager - Tailspin - Space Game (tailspin-space-game-rg)'
               appName: '$(WebAppNameStaging)'
               package: '$(Pipeline.Workspace)/drop/$(buildConfiguration)/*.zip'
