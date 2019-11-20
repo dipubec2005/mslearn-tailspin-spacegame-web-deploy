@@ -149,7 +149,7 @@ stages:
           - task: SqlAzureDacpacDeployment@1
             displayName: 'Deploy SQL schema'
             inputs:
-              azureSubscription: '$(databaseServiceConnection)'
+              azureSubscription: 'Resource Manager - Tailspin - Space Game (databricks-rg)'
               authenticationType: 'server'
               serverName: '$(servername).database.windows.net'
               databaseName: '$(databasename)'
